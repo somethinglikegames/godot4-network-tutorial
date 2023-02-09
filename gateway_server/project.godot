@@ -14,6 +14,10 @@ config/name="Gateway Server"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[editor]
+
+run/main_run_args="--display-driver headless"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
