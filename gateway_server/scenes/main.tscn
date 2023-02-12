@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxp7ewdesqn7f"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_xswii"]
+[ext_resource type="Script" path="res://scenes/network/authentication_server.gd" id="2_wkoje"]
+[ext_resource type="Script" path="res://scenes/network/gateway_server.gd" id="3_r2pjl"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_xswii")
+
+[node name="AuthenticationServer" type="Node" parent="."]
+script = ExtResource("2_wkoje")
+
+[node name="GatewayServer" type="Node" parent="."]
+script = ExtResource("3_r2pjl")

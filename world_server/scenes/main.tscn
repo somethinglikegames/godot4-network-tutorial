@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyt5qj53tlblt"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_ogr01"]
+[ext_resource type="Script" path="res://scenes/network/world_server.gd" id="2_yt7u7"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ogr01")
+
+[node name="WorldServer" type="Node" parent="."]
+script = ExtResource("2_yt7u7")

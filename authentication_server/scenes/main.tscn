@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d16fs4e01n5bj"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_ckroi"]
+[ext_resource type="Script" path="res://scenes/network/authentication_server.gd" id="2_em3qb"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ckroi")
+
+[node name="AuthenticationServer" type="Node" parent="."]
+script = ExtResource("2_em3qb")
