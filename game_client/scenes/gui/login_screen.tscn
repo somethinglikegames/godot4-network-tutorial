@@ -1,0 +1,99 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2jk80tkml17x"]
+
+[ext_resource type="Script" path="res://scenes/gui/login_screen.gd" id="1_d5anq"]
+
+[node name="LoginScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_d5anq")
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -68.0
+offset_right = 51.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grid" type="GridContainer" parent="Center"]
+layout_mode = 2
+theme_override_constants/h_separation = 17
+columns = 2
+
+[node name="GatewayServerLabel" type="Label" parent="Center/Grid"]
+layout_mode = 2
+text = "Gateway Server"
+
+[node name="GatewayServer" type="HBoxContainer" parent="Center/Grid"]
+layout_mode = 2
+
+[node name="Server" type="LineEdit" parent="Center/Grid/GatewayServer"]
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "Server Address"
+expand_to_text_length = true
+
+[node name="Port" type="LineEdit" parent="Center/Grid/GatewayServer"]
+layout_mode = 2
+text = "1910"
+placeholder_text = "Port"
+expand_to_text_length = true
+
+[node name="WorldServerLabel" type="Label" parent="Center/Grid"]
+layout_mode = 2
+text = "World Server"
+
+[node name="WorldServer" type="HBoxContainer" parent="Center/Grid"]
+layout_mode = 2
+
+[node name="Server" type="LineEdit" parent="Center/Grid/WorldServer"]
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "Server Address"
+expand_to_text_length = true
+
+[node name="Port" type="LineEdit" parent="Center/Grid/WorldServer"]
+layout_mode = 2
+text = "1909"
+placeholder_text = "Port"
+expand_to_text_length = true
+
+[node name="UsernameLabel" type="Label" parent="Center/Grid"]
+layout_mode = 2
+text = "Username"
+
+[node name="Username" type="LineEdit" parent="Center/Grid"]
+layout_mode = 2
+placeholder_text = "Username"
+expand_to_text_length = true
+
+[node name="PasswordLabel" type="Label" parent="Center/Grid"]
+layout_mode = 2
+text = "Password"
+
+[node name="Password" type="LineEdit" parent="Center/Grid"]
+layout_mode = 2
+placeholder_text = "Password"
+secret = true
+expand_to_text_length = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Center/Grid"]
+layout_mode = 2
+
+[node name="Login" type="Button" parent="Center/Grid"]
+layout_mode = 2
+text = "Login"
+
+[connection signal="pressed" from="Center/Grid/Login" to="." method="_on_login_pressed"]
