@@ -12,11 +12,11 @@ var login : Callable
 
 
 func reset() -> void:
-    login_btn.disabled = false
+	login_btn.disabled = false
 
 
 func _on_login_pressed() -> void:
-    login_btn.disabled = true
-    login.call(NetworkConnectionData.new(gw_server_addr_txt.text, gw_server_port_txt.text as int),
-            NetworkConnectionData.new(world_server_addr_txt.text, world_server_port_txt.text as int),
-            username_txt.text, password_txt.text)
+	login_btn.disabled = true
+	login.call(NetworkConnectionData.new(gw_server_addr_txt.text, gw_server_port_txt.text as int),
+			NetworkConnectionData.new(world_server_addr_txt.text, world_server_port_txt.text as int),
+			username_txt.text, password_txt.text)

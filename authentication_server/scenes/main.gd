@@ -4,6 +4,6 @@ extends Node
 
 
 func _ready() -> void:
-    get_tree().set_multiplayer(SceneMultiplayer.new(),
-        ^"/root/Main/AuthenticationServer")
-    authentication_server.startup()
+	get_tree().set_multiplayer(SceneMultiplayer.new(),
+		^"/root/Main/AuthenticationServer")
+	authentication_server.startup()
