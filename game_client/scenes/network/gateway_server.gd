@@ -13,6 +13,7 @@ func login_to_server(_username: String, _password: String) -> void:
 	print("Connecting to %s" % gateway_server.to_string())
 	var ret = network.create_client(gateway_server.address, gateway_server.port)
 	if ret == OK:
+		network.host.dtls_client_setup("localhost", TLSOptions.client_unsafe())
 		get_multiplayer().multiplayer_peer = network
 		get_multiplayer().connected_to_server.connect(_on_connection_succeeded)
 		get_multiplayer().connection_failed.connect(_on_connection_failed.bind(FAILED))

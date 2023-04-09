@@ -4,6 +4,8 @@ extends Node
 @export_range(2, 4095) var max_clients := 2
 
 @export var shared_secret := "JustARandomValueYouCantGuess".to_utf8_buffer() # Extract value to external config file
+const dtls_key := preload("res://crypto/authentication_server.key")
+const dtls_cert := preload("res://crypto/authentication_server.crt")
 var _crypto = Crypto.new()
 var peers = []
 
@@ -26,6 +28,7 @@ func startup() -> void:
 	var network := ENetMultiplayerPeer.new()
 	var ret := network.create_server(network_port, max_clients)
 	if ret == OK:
+		network.host.dtls_server_setup(TLSOptions.server(dtls_key, dtls_cert))
 		multiplayer.server_relay = false
 		multiplayer.set_multiplayer_peer(network)
 		print("Server started on port %d, allowing max %d connections"

@@ -3,6 +3,9 @@ extends Node
 @export_range(1025, 65536) var network_port := 1909
 @export_range(2, 4095) var max_clients := 2
 
+const dtls_key := preload("res://crypto/world_server.key")
+const dtls_cert := preload("res://crypto/world_server.crt")
+
 var jwt_algorithm: JWTAlgorithm
 
 func _ready() -> void:
@@ -21,6 +24,7 @@ func startup() -> void:
 	var network := ENetMultiplayerPeer.new()
 	var ret := network.create_server(network_port, max_clients)
 	if ret == OK:
+		network.host.dtls_server_setup(TLSOptions.server(dtls_key, dtls_cert))
 		get_multiplayer().set_multiplayer_peer(network)
 		print("Server started on port %d, allowing max %d connections"
 				% [network_port, max_clients])

@@ -14,6 +14,7 @@ func startup() -> void:
 	var ret = network.create_client(authentication_server, authentication_server_port)
 	var _hash := _crypto.hmac_digest(HashingContext.HASH_SHA256, shared_secret, Time.get_date_string_from_system(true).to_utf8_buffer())
 	if ret == OK:
+		network.host.dtls_client_setup("localhost", TLSOptions.client_unsafe())
 		multiplayer.multiplayer_peer = network
 		multiplayer.connection_failed.connect(_on_connection_failed.bind(FAILED))
 		multiplayer.connected_to_server.connect(func() -> void:
