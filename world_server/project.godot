@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 run/main_run_args="--display-driver headless"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/jwt/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
