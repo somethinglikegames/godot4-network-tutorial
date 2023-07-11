@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://ks4pbrowv8ah"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_pksui"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tiyeq"]
+size = Vector2(25, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldj7f"]
+albedo_color = Color(0.156863, 0.470588, 0.266667, 1)
+
+[node name="World" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_pksui")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_tiyeq")
+surface_material_override/0 = SubResource("StandardMaterial3D_ldj7f")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0)
+light_energy = 10.0
+omni_range = 25.0
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/levels/player.tscn")
+spawn_path = NodePath("../Players")

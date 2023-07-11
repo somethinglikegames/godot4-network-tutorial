@@ -8,7 +8,6 @@ var world_server_data : NetworkConnectionData
 var rtt_timer : Timer
 
 
-
 func _ready() -> void:
 	_load_login_screen()
 
@@ -18,7 +17,7 @@ func _load_login_screen() -> void:
 		c.queue_free()
 	var instance = login_screen.instantiate()
 	instance.login = _login
-	add_child(instance)
+	add_child(instance, true)
 
 
 func _login(gw_server: NetworkConnectionData, wrld_server: NetworkConnectionData, username: String, password: String) -> void:
@@ -45,6 +44,18 @@ func _login_callback(return_code: int, token: String) -> void:
 		get_tree().set_multiplayer(SceneMultiplayer.new(), ^"/root/Main/WorldServer")
 		world_server.world_server = world_server_data
 		world_server.callback = _world_server_callback
+
+		var levelNode = Node.new()
+		levelNode.name = "Level"
+		world_server.add_child(levelNode)
+		var levelSpawner := MultiplayerSpawner.new()
+		levelSpawner.name = "LevelSpawner"
+		world_server.add_child(levelSpawner)
+		levelSpawner.spawn_path = levelNode.get_path()
+		levelSpawner.spawn_limit = 1
+		levelSpawner.add_spawnable_scene("res://scenes/levels/level.tscn")
+
+
 		world_server.login_to_server(token)
 	else :
 		print("Something went wrong…")
@@ -59,6 +70,8 @@ func _world_server_callback(return_code: int) -> void:
 		rtt_timer.timeout.connect(_on_rtt_timer_timeout)
 		rtt_timer.start(5)
 		# Add further game logic
+		$LoginScreen.queue_free()
+		$WorldServer.disconnected.connect(func() -> void: _load_login_screen())
 	else:
 		gateway_server.queue_free()
 		gateway_server = null

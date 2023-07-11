@@ -1,5 +1,7 @@
 extends Node
 
+signal started
+
 @export_range(1025, 65536) var network_port := 1909
 @export_range(2, 4095) var max_clients := 2
 
@@ -7,6 +9,7 @@ const dtls_key := preload("res://crypto/world_server.key")
 const dtls_cert := preload("res://crypto/world_server.crt")
 
 var jwt_algorithm: JWTAlgorithm
+
 
 func _ready() -> void:
 	var public_key := CryptoKey.new()
@@ -29,14 +32,15 @@ func startup() -> void:
 		print("Server started on port %d, allowing max %d connections"
 				% [network_port, max_clients])
 
-		network.peer_connected.connect(
+		get_multiplayer().peer_connected.connect(
 			func(client_id: int) -> void:
 				print("Client %d connected" % client_id)
 				)
-		network.peer_disconnected.connect(
+		get_multiplayer().peer_disconnected.connect(
 			func(client_id: int) -> void:
 				print("Client %d disconnected" % client_id)
 				)
+		started.emit()
 	else:
 		print("Error while starting server: %d" % ret)
 		get_tree().quit(ret)
@@ -62,4 +66,10 @@ func c_login_response(_result: bool) -> void:
 
 
 func disconnect_player(user_id: int) -> void:
+	print("Disconnect %d" % user_id)
 	get_multiplayer().disconnect_peer(user_id)
+
+
+func _exit_tree() -> void:
+	for id in get_multiplayer().get_peers():
+		disconnect_player(id)

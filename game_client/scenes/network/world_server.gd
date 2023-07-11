@@ -1,5 +1,7 @@
 extends Node
 
+signal disconnected
+
 var network := ENetMultiplayerPeer.new()
 var peer : ENetPacketPeer = null
 var world_server : NetworkConnectionData
@@ -17,6 +19,7 @@ func login_to_server(_token: String) -> void:
 		get_multiplayer().multiplayer_peer = network
 		get_multiplayer().connected_to_server.connect(_on_connection_succeeded)
 		get_multiplayer().connection_failed.connect(_on_connection_failed.bind(FAILED))
+		get_multiplayer().peer_disconnected.connect(func(): disconnected.emit())
 	else:
 		_on_connection_failed(ret)
 
