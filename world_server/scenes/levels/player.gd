@@ -14,10 +14,13 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 		$PlayerInput.set_multiplayer_authority(id)
 
 @onready var input = $PlayerInput
+@onready var synchronizer = $ServerSynchronizer
+
 
 func _ready() -> void:
 	if player == multiplayer.get_unique_id():
 		$Camera3D.current = true
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -39,3 +42,13 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	print("%s entered" % body.name)
+	synchronizer.set_visibility_for(str(body.name).to_int(), true)
+
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	print("%s exited" % body.name)
+	synchronizer.set_visibility_for(str(body.name).to_int(), false)
