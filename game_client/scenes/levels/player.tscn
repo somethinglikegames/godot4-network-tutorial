@@ -16,6 +16,10 @@ properties/2/path = NodePath(".:velocity")
 properties/2/spawn = true
 properties/2/sync = false
 properties/2/watch = true
+properties/3/path = NodePath(".:currentColor")
+properties/3/spawn = true
+properties/3/sync = false
+properties/3/watch = true
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x4mb6"]
 properties/0/path = NodePath(".:direction")
@@ -25,7 +29,8 @@ properties/0/watch = false
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ke5s1"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_47jl6"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_y347o"]
+resource_local_to_scene = true
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_n3fxv")
@@ -45,7 +50,7 @@ shape = SubResource("CapsuleShape3D_ke5s1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_47jl6")
+mesh = SubResource("CapsuleMesh_y347o")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.4, 2)

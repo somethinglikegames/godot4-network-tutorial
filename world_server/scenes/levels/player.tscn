@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://2wia3cfulcss"]
+[gd_scene load_steps=9 format=3 uid="uid://2wia3cfulcss"]
 
 [ext_resource type="Script" path="res://scenes/levels/player.gd" id="1_n3fxv"]
 [ext_resource type="Script" path="res://scenes/levels/player_input.gd" id="2_i3upa"]
+[ext_resource type="Material" uid="uid://d4drjh764nrkd" path="res://materials/red.tres" id="3_7qqcj"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3dnf6"]
 properties/0/path = NodePath(".:player")
@@ -16,6 +17,10 @@ properties/2/path = NodePath(".:velocity")
 properties/2/spawn = true
 properties/2/sync = false
 properties/2/watch = true
+properties/3/path = NodePath(".:currentColor")
+properties/3/spawn = true
+properties/3/sync = false
+properties/3/watch = true
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrlye"]
 properties/0/path = NodePath(".:direction")
@@ -26,6 +31,8 @@ properties/0/watch = false
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ke5s1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_47jl6"]
+resource_local_to_scene = true
+material = ExtResource("3_7qqcj")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ebc6d"]
 radius = 5.0
